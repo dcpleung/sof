@@ -55,7 +55,6 @@ src/schedule				@tlauda @mrajwa
 # other helpers
 test/**					@jajanusz
 scripts/*				@xiulipan
-rimage/*				@xiulipan
 
 # tools(old soft)
 tools/logger/*				@xiulipan @bkokoszx @akloniex
