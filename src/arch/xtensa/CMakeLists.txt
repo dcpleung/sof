@@ -325,13 +325,12 @@ include(ExternalProject)
 
 ExternalProject_Add(rimage_ep
 	DEPENDS check_version_h
-	DOWNLOAD_COMMAND ""
+	DOWNLOAD_COMMAND git submodule update --init
 	SOURCE_DIR "${PROJECT_SOURCE_DIR}/rimage"
 	PREFIX "${PROJECT_BINARY_DIR}/rimage_ep"
 	BINARY_DIR "${PROJECT_BINARY_DIR}/rimage_ep/build"
 	BUILD_ALWAYS 1
-	CMAKE_ARGS -DVERSION_H_PATH=${VERSION_H_PATH}
-		-DPEM_KEY_PREFIX=${PROJECT_SOURCE_DIR}/rimage/keys
+	CMAKE_ARGS -DSOF_SOURCE_DIR=${PROJECT_SOURCE_DIR}
 	INSTALL_COMMAND ""
 )
 
@@ -371,6 +370,8 @@ if(MEU_PATH)
 			-s ${MEU_OFFSET}
 			-k ${RIMAGE_PRIVATE_KEY}
 			-i ${RIMAGE_IMR_TYPE}
+			-f ${SOF_MAJOR}.${SOF_MINOR}
+			-b ${SOF_BUILD}
 			${RIMAGE_MOD_OFFSET_FLAG}
 			${bootloader_binary_path}
 			sof-${fw_name}
@@ -411,6 +412,8 @@ else()
 			-m ${fw_name}
 			-k ${RIMAGE_PRIVATE_KEY}
 			-i ${RIMAGE_IMR_TYPE}
+			-f ${SOF_MAJOR}.${SOF_MINOR}
+			-b ${SOF_BUILD}
 			${RIMAGE_MOD_OFFSET_FLAG}
 			${bootloader_binary_path}
 			sof-${fw_name}
